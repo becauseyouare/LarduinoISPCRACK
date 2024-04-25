@@ -1,0 +1,78 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "C:/Users/atomi/Dropbox/PlatformIO/Projects/LarduinoISPCRACK/src",
+                "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/SoftwareSerial",
+                "C:/Users/atomi/.platformio/packages/framework-lgt8fx/cores/lgt8f",
+                "C:/Users/atomi/.platformio/packages/framework-lgt8fx/variants/lgt8fx8p",
+                "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/E2PROM",
+                "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/LarduinoISP",
+                "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/PMU",
+                "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/Rtc_Pcf8563",
+                "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/SPI/src",
+                "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/VUsbDevice",
+                "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/VUsbKeyboard",
+                "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/VUsbMouse",
+                "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/WDT",
+                "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/Wire",
+                "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/Wire/utility",
+                "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/differential_amplifier",
+                "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/lgt328p",
+                "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/usbdrv",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "C:/Users/atomi/Dropbox/PlatformIO/Projects/LarduinoISPCRACK/src",
+                    "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/SoftwareSerial",
+                    "C:/Users/atomi/.platformio/packages/framework-lgt8fx/cores/lgt8f",
+                    "C:/Users/atomi/.platformio/packages/framework-lgt8fx/variants/lgt8fx8p",
+                    "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/E2PROM",
+                    "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/LarduinoISP",
+                    "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/PMU",
+                    "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/Rtc_Pcf8563",
+                    "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/SPI/src",
+                    "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/VUsbDevice",
+                    "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/VUsbKeyboard",
+                    "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/VUsbMouse",
+                    "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/WDT",
+                    "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/Wire",
+                    "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/Wire/utility",
+                    "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/differential_amplifier",
+                    "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/lgt328p",
+                    "C:/Users/atomi/.platformio/packages/framework-lgt8fx/libraries/usbdrv",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60114",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO_AVR_LARDU_328P",
+                "AVR_LARDU_328E",
+                "SERIAL_RX_BUFFER_SIZE=250",
+                "F_CPU=32000000L",
+                "CLOCK_SOURCE=1",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO_ARCH_LGT",
+                "ARDUINO=10812",
+                ""
+            ],
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++11",
+            "compilerPath": "C:/Users/atomi/.platformio/packages/toolchain-atmelavr/bin/avr-gcc.exe",
+            "compilerArgs": [
+                "-mmcu=atmega328p",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}
