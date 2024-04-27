@@ -53,7 +53,7 @@
                 ]
             },
             "defines": [
-                "PLATFORMIO=60114",
+                "PLATFORMIO=60115",
                 "ARDUINO_ARCH_AVR",
                 "ARDUINO_AVR_LARDU_328P",
                 "AVR_LARDU_328E",

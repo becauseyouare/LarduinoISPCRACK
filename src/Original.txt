@@ -45,8 +45,10 @@
 // - More information at http://code.google.com/p/mega-isp
 
 // LarduinoISP for LGTF8FX8D/P Series
-#include "swd_drv.h"
-#include "pins_arduino.h"
+// #include "swd_drv.h"
+// #include "pins_arduino.h"
+#include "main.h"
+#include "swd_lgt8fx8p.h"
 
 #define RESET	SS
 #define LED_HB    9

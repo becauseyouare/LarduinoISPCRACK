@@ -184,6 +184,7 @@ void loop(void)
         heartbeat(40);
         if (Serial.available()){
             pinMode(D3,INPUT);  // turn on level shifter
+            digitalWrite(D6,LOW);  // ctest light out
             ctest = 0;      // ctest mode off
             avrisp();
         }
@@ -664,6 +665,7 @@ int avrisp()
         error = 0;
         end_pmode();
         empty_reply();
+        ctest = 1;
         break;
     case 0x75: // STK_READ_SIGN 'u'
         read_signature();
