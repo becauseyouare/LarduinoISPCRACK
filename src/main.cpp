@@ -157,8 +157,11 @@ void loop(void)
             pinMode(D3,OUTPUT);     //disable the level shifter
             uint8_t cstate = 0;
             cstate += (analogRead(A0)<200);  //measure connections
+            digitalWrite(A0,LOW);
+            pinMode(A0,OUTPUT);
             cstate += (analogRead(A1)<200);
             cstate += (analogRead(A2)<200);
+            pinMode(A0,INPUT);
             if(cstate){
                 digitalWrite(D6,LOW);   //open connection
             }else{
@@ -202,6 +205,7 @@ void loop(void)
             mySerial.flush();
         }
         heartbeat(20);
+        ctest = 1;              // reactivate the ctest mode
     }
 }
 
@@ -665,7 +669,7 @@ int avrisp()
         error = 0;
         end_pmode();
         empty_reply();
-        ctest = 1;
+//        ctest = 1;
         break;
     case 0x75: // STK_READ_SIGN 'u'
         read_signature();
