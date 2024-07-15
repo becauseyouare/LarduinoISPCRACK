@@ -163,24 +163,13 @@ void loop(void)
             digitalWrite(LEVELSHIFT_ENABLE,LOW);
             pinMode(LEVELSHIFT_ENABLE,OUTPUT);     //disable the level shifter
             uint8_t cstate = 0;     // continuity state initialized to 0
-            //Serial.print("pins ");
             pina = analogRead(A0);      //1200 to 1600 = open circuit
             pinb = analogRead(A1);
             pinc = analogRead(A2);
-            // Serial.print(pina,DEC);Serial.print(", ");
-            // Serial.print(pinb,DEC);Serial.print(", ");
-            // Serial.print(pinc,DEC);Serial.println(" ");
-            // delay(500);
             if((pina > 1200)&&(pina < 1600)) cstate = 1;
             if((pinb > 1200)&&(pinb < 1600)) cstate = 1;
             if((pinc > 1200)&&(pinc < 1600)) cstate = 1;
 
-            //cstate += (analogRead(A0)<200);  //measure connections
-            // digitalWrite(A0,LOW);
-            // pinMode(A0,OUTPUT);
-            //cstate += (analogRead(A1)<200);
-            //cstate += (analogRead(A2)<200);
-            //pinMode(A0,INPUT);
             if(cstate){
                 digitalWrite(LED_CTEST,LOW);   //open connection
             }else{
