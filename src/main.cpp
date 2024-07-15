@@ -68,6 +68,8 @@ SoftwareSerial mySerial(12, 13); // RX, TX
 #define LED_HB 9
 #define LED_ERR 8
 #define LED_PMODE 7
+#define LED_CTEST 6
+#define LEVELSHIFT_ENABLE 3
 #define PROG_FLICKER true
 
 #define HWVER 3
@@ -81,6 +83,9 @@ SoftwareSerial mySerial(12, 13); // RX, TX
 #define STK_INSYNC 0x14
 #define STK_NOSYNC 0x15
 #define CRC_EOP 0x20 // ok it is a space...
+int pina;
+int pinb;
+int pinc;
 
 void pulse(int pin, int times);
 
@@ -88,6 +93,8 @@ void setup()
 {
     Serial.begin(115200);
     mySerial.begin(115200);
+    pinMode(LED_CTEST,OUTPUT);
+    pulse(LED_CTEST,2);
     pinMode(LED_PMODE, OUTPUT);
     pulse(LED_PMODE, 2);
     pinMode(LED_ERR, OUTPUT);
@@ -153,22 +160,34 @@ void loop(void)
         // is continuity test active?
         if(ctest)
         {
-            digitalWrite(D3,LOW);
-            pinMode(D3,OUTPUT);     //disable the level shifter
-            uint8_t cstate = 0;
-            cstate += (analogRead(A0)<200);  //measure connections
-            digitalWrite(A0,LOW);
-            pinMode(A0,OUTPUT);
-            cstate += (analogRead(A1)<200);
-            cstate += (analogRead(A2)<200);
-            pinMode(A0,INPUT);
+            digitalWrite(LEVELSHIFT_ENABLE,LOW);
+            pinMode(LEVELSHIFT_ENABLE,OUTPUT);     //disable the level shifter
+            uint8_t cstate = 0;     // continuity state initialized to 0
+            //Serial.print("pins ");
+            pina = analogRead(A0);      //1200 to 1600 = open circuit
+            pinb = analogRead(A1);
+            pinc = analogRead(A2);
+            // Serial.print(pina,DEC);Serial.print(", ");
+            // Serial.print(pinb,DEC);Serial.print(", ");
+            // Serial.print(pinc,DEC);Serial.println(" ");
+            // delay(500);
+            if((pina > 1200)&&(pina < 1600)) cstate = 1;
+            if((pinb > 1200)&&(pinb < 1600)) cstate = 1;
+            if((pinc > 1200)&&(pinc < 1600)) cstate = 1;
+
+            //cstate += (analogRead(A0)<200);  //measure connections
+            // digitalWrite(A0,LOW);
+            // pinMode(A0,OUTPUT);
+            //cstate += (analogRead(A1)<200);
+            //cstate += (analogRead(A2)<200);
+            //pinMode(A0,INPUT);
             if(cstate){
-                digitalWrite(D6,LOW);   //open connection
+                digitalWrite(LED_CTEST,LOW);   //open connection
             }else{
-                digitalWrite(D6,HIGH);  //all good connections
+                digitalWrite(LED_CTEST,HIGH);  //all good connections
             }
         } else {
-            digitalWrite(D6,LOW); // turn indicator off
+            digitalWrite(LED_CTEST,LOW); // turn indicator off
         }
 
         // is pmode active?
@@ -185,9 +204,9 @@ void loop(void)
 
         // light the heartbeat LED
         heartbeat(40);
-        if (Serial.available()){
-            pinMode(D3,INPUT);  // turn on level shifter
-            digitalWrite(D6,LOW);  // ctest light out
+        if (Serial.available()){  // if a serial byte comes in
+            pinMode(LEVELSHIFT_ENABLE,INPUT);  // turn on level shifter
+            digitalWrite(LED_CTEST,LOW);  // ctest light out
             ctest = 0;      // ctest mode off
             avrisp();
         }
@@ -205,6 +224,7 @@ void loop(void)
             mySerial.flush();
         }
         heartbeat(20);
+        digitalWrite(LED_CTEST,LOW);   //Keep the continuity LED off
         ctest = 1;              // reactivate the ctest mode
     }
 }
