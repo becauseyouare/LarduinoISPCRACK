@@ -86,6 +86,7 @@ SoftwareSerial mySerial(12, 13); // RX, TX
 int pina;
 int pinb;
 int pinc;
+int SWDread = 0;
 
 void pulse(int pin, int times);
 
@@ -160,23 +161,26 @@ void loop(void)
         // is continuity test active?
         if(ctest)
         {
-            digitalWrite(LEVELSHIFT_ENABLE,LOW);
-            pinMode(LEVELSHIFT_ENABLE,OUTPUT);     //disable the level shifter
-            uint8_t cstate = 0;     // continuity state initialized to 0
-            pina = analogRead(A0);      //1200 to 1600 = open circuit
-            pinb = analogRead(A1);
-            pinc = analogRead(A2);
-            if((pina > 1200)&&(pina < 1600)) cstate = 1;
-            if((pinb > 1200)&&(pinb < 1600)) cstate = 1;
-            if((pinc > 1200)&&(pinc < 1600)) cstate = 1;
-
-            if(cstate){
-                digitalWrite(LED_CTEST,LOW);   //open connection
-            }else{
-                digitalWrite(LED_CTEST,HIGH);  //all good connections
+            digitalWrite(D3, LOW);
+            pinMode(D3, OUTPUT); // disable the level shifter
+            uint8_t cstate = 0;
+            cstate += (analogRead(A0) < 200); // measure D10 RST connections
+            cstate += (analogRead(A1) < 200); // measure D13 SWC connection
+            SWDread = analogRead(A2);         // measure D12 SWD connection
+            if (SWDread > 200 && SWDread < 500)
+                cstate += 1;
+            if (cstate)
+            {
+                digitalWrite(LED_CTEST, LOW); // open connection
             }
-        } else {
-            digitalWrite(LED_CTEST,LOW); // turn indicator off
+            else
+            {
+                digitalWrite(LED_CTEST, HIGH); // all good connections turn indicator on
+            }
+        }
+        else
+        {                                 // continuity test not active
+            digitalWrite(LED_CTEST, LOW); // turn indicator off
         }
 
         // is pmode active?
